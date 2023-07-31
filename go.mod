@@ -1,4 +1,4 @@
-module github.com/jonamsalem/mongo-golang
+module github.com/jonamsalem/ginServer
 
 go 1.20
 
