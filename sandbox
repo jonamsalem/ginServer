@@ -1,0 +1,223 @@
+// database := client.Database("quickstart")
+// podcastCollection := database.Collection("podcasts")
+
+
+
+// episodesCollection := database.Collection("episodes")
+
+	// mongoPodcast := Podcast{
+    //     Name: "mongo",
+    //     Author: "mongodb",
+    //     Tags: []string{"Go", "MongoDB"},
+    // }
+	// var err1 error
+	// podcastCollection.InsertOne(ctx, mongoPodcast)
+	// if err!= nil {
+    //     log.Fatal(err1)
+    // }
+
+	// podcast := Podcast{
+    //     Name: "Golang",
+    //     Author: "me",
+    //     Tags: []string{"Go", "MongoDB"},
+	// }
+	// var err1 error
+	// podcastCollection.InsertOne(ctx, podcast)
+	// if err!= nil {
+    //     log.Fatal(err1)
+    // }
+
+	// resultCursor, err:= podcastCollection.Find(ctx, bson.M{"author": "me"})
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// var podcast []bson.M
+	// if err:= resultCursor.All(ctx, &podcast) ; err!= nil {
+	// 	log.Fatal(err)
+    // }
+	// fmt.Println(podcast)
+
+
+	// result ,err := podcastCollection.DeleteMany(ctx, bson.M{"title": "mongo"})
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// fmt.Println(result.DeletedCount)
+
+
+
+	// var podcasts []Podcast
+	// podcastCursor, err:= podcastCollection.Find(ctx, bson.M{})
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// if err:= podcastCursor.All(ctx, &podcasts); err!= nil {
+	// 	log.Fatal(err)
+    // }
+
+	// fmt.Println(podcasts)
+	
+
+
+	// var episodes []Episode
+
+	// episodesCursor, err := episodesCollection.Find(ctx, bson.M{})
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// if err:= episodesCursor.All(ctx, &episodes); err!= nil {
+    //     log.Fatal(err)
+    // }
+	// fmt.Println(episodes)
+
+	// result ,err := episodesCollection.InsertOne(
+	// 	ctx,
+    //     Episode{
+    //         ID: primitive.NewObjectID(),
+    //         Podcast: primitive.NewObjectID(),
+    //         Title: "Episode 1",
+    //         Description: "This is the first episode of the podcast",
+    //         Duration: 10,
+    //     },
+	// )
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// fmt.Println(result.InsertedID)
+
+	// result, err := podcastCollection.InsertOne(
+	// 	ctx, Podcast{
+	// 		ID: primitive.NewObjectID(),
+    //         Name: "me",
+    //         Author: "me",
+    //         Tags: []string{"Go", "MongoDB", "GoLang"},
+	// 	},
+	// )
+	// if err!= nil {
+    //     log.Fatal(err)/
+    // }
+	// fmt.Println(result.InsertedID)
+
+
+	
+
+
+	// var podcast bson.M 
+	// if err = podcastCollection.FindOne(ctx, bson.M{"author": "ME"}).Decode(&podcast); err != nil {
+	// 	log.Fatal(err)
+    // }
+	// fmt.Println(podcast)
+	
+
+
+	// id, _ := primitive.ObjectIDFromHex("64c7d21411e804e2379385ca")
+	// result, err := podcastCollection.UpdateOne(ctx, 
+	// 	bson.M{"_id": id}, 
+	// 	bson.D{{"$set", bson.D{{"author", "fdsgh"}}}})
+
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// fmt.Printf("Updated %v Documents\n", result.ModifiedCount)
+	
+
+	// result, err := podcastCollection.UpdateMany(ctx, 
+	// bson.M{"title": "Golang Quickstart Podcast"},
+	// bson.D{{"$set", bson.D{{"author", "ME"}}}})
+	
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// fmt.Printf("Updated %v Documents\n", result.ModifiedCount)
+
+
+	// result, err:= podcastCollection.ReplaceOne(ctx,
+	// 	bson.M{"author": "fdsgh"},
+	// 	bson.M{"title": "my show!!!!!!", "author": "11111"})
+	// 	if err!= nil {
+    //         log.Fatal(err)
+    //     }
+	// 	fmt.Printf("Updated %v Documents\n", result.ModifiedCount)
+	
+
+	// returns all the episodes
+	// cursor, err := episodesCollection.Find(ctx, bson.M{})
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// var episodes []bson.M
+	// if err := cursor.All(ctx, &episodes); err!= nil {
+    //     log.Fatal(err)
+    // }
+	// for _, episode := range episodes {
+	// 	fmt.Println(episode)
+    // }
+
+	// var podcast bson.M 
+	// if err = podcastCollection.FindOne(ctx, bson.M{}).Decode(&podcast); err != nil {
+	// 	log.Fatal(err)
+    // }
+	// fmt.Println(podcast)
+
+	// filterCursor, err := episodesCollection.Find(ctx, bson.M{"duration": 25})
+	// if err!= nil {
+    //     log.Fatal(err) 
+    // }
+	// var episodesFiltered []bson.M
+	// if err := filterCursor.All(ctx, &episodesFiltered); err!= nil {
+    //     log.Fatal(err)
+    // }
+	// fmt.Println(episodesFiltered)
+
+
+	// opts:= options.Find()
+	// opts.SetSort(bson.D{{"duration", -1}})
+	// sortCursor, err := episodesCollection.Find(ctx, bson.D{
+	// 	{"duration", bson.D{
+	// 		{"$gt", 26},
+	// 	}}, }, opts)
+
+	// 	var episodesSorted []bson.M
+	// 	if err:= sortCursor.All(ctx, &episodesSorted); err!= nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	fmt.Println(episodesSorted)
+
+
+
+
+
+
+	// podcastResult, err := podcastCollection.InsertOne(ctx, bson.D{
+	// 	{ "title", "Golang Quickstart Podcast"},
+	// 	{ "author", "Nick Raboy"},
+	// 	{"Tags", bson.A{"development", "golang"}},
+	// })
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }
+	// fmt.Println(podcastResult.InsertedID)
+
+	// episodeResult , err := episodesCollection.InsertMany(ctx, []interface{}{
+	// 	bson.D{
+	// 	{"podcast", podcastResult.InsertedID},
+	// 	{"title",  "Episode 1"},
+	// 	{"description", "This is the first episode of the podcast"},
+	// 	{"duration", 25},
+	// 	},
+	// 	bson.D{
+	// 		{"podcast", podcastResult.InsertedID},
+	// 		{"title",  "Episode 2"},
+	// 		{"description", "This is the second episode of the podcast"},
+	// 		{"duration", 32},
+	// 		},
+			
+
+	// })
+
+	// if err!= nil {
+    //     log.Fatal(err)
+    // }else{
+	// 	fmt.Println(episodeResult.InsertedIDs)
+	// }
+
