@@ -117,6 +117,7 @@ type Book struct {
 	Title string          		`bson:"title, omitempty `
 	Description string 		 `bson:"description, omitempty `
 	Author string			`bson:"author, omitempty ` 
+	Category string			`bson:"category, omitempty ` 
 }
 
 func main() {
@@ -131,13 +132,11 @@ func main() {
 	router := gin.Default()
 	router.GET("/books", getAllBooks)
 	router.GET("/oneBook", getOneBook)
+	router.GET("/bookByCategory", getByCategory)
     router.POST("/createBook", createBook)
 	router.DELETE("/deleteBook", deleteBook)
 	router.PUT("/updateBook", updateBook)
-	// router.PATCH("checkout", checkoutBook)
-	// router.PATCH("/return", returnBook)
-	// router.POST("/books", createBook)
-	// router.DELETE("/books", deleteBook)
+
 
 	router.Run("localhost:" + port)
 }
@@ -205,6 +204,38 @@ func getOneBook(c *gin.Context) {
 c.IndentedJSON(http.StatusOK, book)
 defer client.Disconnect(ctx)
 }
+
+
+func getByCategory(c *gin.Context) {
+	ctx, booksCollection, client := dbConnection()
+	category :=c.Query("category")
+	if category == "" {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{
+			"error": "Invalid category"})
+			return
+}
+var books []bson.M
+resultCursor, err:= booksCollection.Find(ctx, bson.M{"category": category})
+if err!= nil {
+	c.IndentedJSON(http.StatusBadRequest, gin.H{
+		"error" : "Invalid category"})
+		return
+	}
+	if err := resultCursor.All(ctx, &books); err!= nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{
+			"error" : "no books found"})
+			return
+		}
+
+	c.IndentedJSON(http.StatusOK, gin.H{"books": books})
+	defer client.Disconnect(ctx)
+}
+
+
+
+
+
+
 
 func createBook(c *gin.Context) {
 	ctx, booksCollection, client := dbConnection()
@@ -291,6 +322,9 @@ func updateBook(c *gin.Context) {
     if updatedBook.Title != "" {
         update["$set"] = bson.M{"title": updatedBook.Title}
     }
+	if updatedBook.Category!= "" {
+		update["$set"] =bson.M{"category": updatedBook.Category}
+	}
 
 	result, err := booksCollection.UpdateOne(ctx, bson.M{"_id": objectID},update)
 	
